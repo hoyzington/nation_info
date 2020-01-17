@@ -1,13 +1,14 @@
+require 'bundler'
+Bundler.require
+
+#require 'require-all'
 require 'open-uri'
-require 'nokogiri'
-require 'pry'
+#require 'nokogiri'
+#require 'pry'
 
-require_relative './nation_info/version'
-require_relative './nation_info/scraper'
-require_relative './nation_info/nation'
+require_all './lib'
 
-
-module NationInfo
-  class Error < StandardError; end
-  # Your code goes here...
-end
+#require_relative './nation_info/version'
+#require_relative './nation_info/scraper'
+#require_relative './nation_info/nation'
+#require_relative './nation_info/cli'
