@@ -10,10 +10,12 @@ end
 
 data = Nokogiri::HTML(open('http://www.geognos.com/geo/en/countries-list/Country-Codes-ISO-3166-ISO-Numeric-ISO3-FIPS-ccTLD.html'))
 
-list = data.css("tbody a")
+list = data.css("tbody tr")
+nation = list[i].css("a")[1]
 
-name = list[1].text
+name = nation.text
 puts name
 
-url = list[1].css("href")
+url = nation("href")
 puts url
+
