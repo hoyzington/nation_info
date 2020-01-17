@@ -4,3 +4,5 @@
 # require "nation_info"
 
 require_relative "../config/environment"
+
+CLI.new.start

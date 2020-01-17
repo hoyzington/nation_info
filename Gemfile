@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'require_all'
+gem 'require_all', '~> 3.0'
 gem 'nokogiri'
 gem 'rspec'
 gem 'pry'
