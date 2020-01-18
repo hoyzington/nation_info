@@ -1,20 +1,22 @@
 class Nation
   
-  attr_reader :name, :url, :location, :size, :climate, :population, :religions, :languages, :capital, :ppp_per_capita
+  attr_accessor :name, :url, :location, :size, :climate, :population, :religions, :languages, :capital, :ppp_per_capita
   
-  @@all
+  @@all = []
   
   def initialize(nation_hash)
-    nation_hash.each {|k, v| self.send(("#{k}="), v)
-    @@all << self
+    nation_hash.each {|k, v| self.send(("#{k}="), v)}
   end
   
-  def self.create_from_nations_array(nations_array)
-    nations_array.each {|nation| self.new(nation)
+  def self.create_from_array(nations_array)
+    nations_array.each do |nation|
+      self.new(nation)
+      @@all << self
+    end
   end
   
-  def self.add_nation_info(nation_hash)
-    nation_hash.each {|k, v| self.send(("#{k}="), v)
+  def add_info(nation_hash)
+    nation_hash.each {|k, v| self.send(("#{k}="), v)}
   end
   
   def self.all

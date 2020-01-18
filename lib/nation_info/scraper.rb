@@ -4,7 +4,6 @@ require 'open-uri'
 
 class Scraper
   
-  
   @@base_path = "http://www.geognos.com"
 
   def self.get_nations
@@ -12,31 +11,29 @@ class Scraper
     nations = Nokogiri::HTML(open(@@base_path + "/geo/en/countries-list/Country-Codes-ISO-3166-ISO-Numeric-ISO3-FIPS-ccTLD.html")).css("tbody tr")
     nations.each_with_index do |n, i|
       data = n.css("a")[1]
-      result[i] = {:name => data.text, :url => data.attribute("href").value}
+      result[i] = {name: data.text, url: data.attribute("href").value}
     end
     result
   end
   
-  def self.get_nation_info(nation_url)
+  def self.get_info(nation_url)
     data = Nokogiri::HTML(open(@@base_path + nation_url))
     result = {
-      :location => data.css("#Location p").text,
-      :size => data.css("#Area td").children[1].text + " sq km",
-      :climate => data.css("#Climate p").text.capitalize,
-      :population => data.css("#Population p").text,
-      :religions => reformatter(nation_data, "#Religions"),
-      :languages => reformatter(nation_data, "#Languages"),
-      :capital => data.css("#Capital .geo").text,
-      :ppp_per_capita => "$" + data.css("#GDP tbody").children[7].css("td")[1].text
+      location: data.css("#Location p").text,
+      size: data.css("#Area td").children[1].text + " sq km",
+      climate: data.css("#Climate p").text.capitalize,
+      population: data.css("#Population p").text,
+      religions: data.css("#Religions tbody td").children.reformat,
+      languages: data.css("#Languages tbody td").children.reformat,
+      capital: data.css("#Capital .geo").text,
+      ppp_per_capita: "$" + data.css("#GDP tbody").children[7].css("td")[1].text
     }
-    result
   end
     
-  def reformatter(data, info)
-    stats = data.css("#{info} tbody td").children
+  def reformat(info)
     string_pieces = []
-    stats.each do |d|
-      string_pieces << d.text
+    self.each do |piece|
+      string_pieces << piece.text
     end
     data_array = []
     data_count = string_pieces.count / 3
