@@ -4,19 +4,19 @@ class Nation
   
   @@all = []
   
-  def initialize(nation_hash)
-    nation_hash.each {|k, v| self.send(("#{k}="), v)}
+  def initialize(first_hash)
+    first_hash.each {|k, v| self.send(("#{k}="), v)}
   end
   
   def self.create_from_array(nations_array)
-    nations_array.each do |nation|
-      self.new(nation)
-      @@all << self
+    nations_array.each do |item|
+      nation = self.new(item)
+      @@all << nation
     end
   end
   
-  def add_info(nation_hash)
-    nation_hash.each {|k, v| self.send(("#{k}="), v)}
+  def add_info(second_hash)
+    second_hash.each {|k, v| self.send(("#{k}="), v)}
   end
   
   def self.all
