@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+From the `nation_info` directory, run `bin/nationinfo`.
 
 ## Development
 
