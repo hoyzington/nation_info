@@ -28,7 +28,7 @@ Nokogiri::HTML(open('http://www.geognos.com/geo/en/countries-list/Country-Codes-
 #      religions: data.css("#Religions tbody td").children.reformat,
 #      languages: data.css("#Languages tbody td").children.reformat,
       capital: data.css("#Capital .geo").text,
-      ppp_per_capita: data.css("#GDP tbody").children[7].css("td")[1].text
+#      ppp_per_capita: data.css("#GDP tbody").children[7].css("td")[1].text
     }
   end
     
