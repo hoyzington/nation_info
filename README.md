@@ -1,8 +1,6 @@
 # NationInfo
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nation_info`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to NationInfo! This app is a quick and easy way to get some basic information (not overwhelming or political) on any nation in the world. It's great for increasing your knowledge of geography. Hope you enjoy!
 
 ## Installation
 
