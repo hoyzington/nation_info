@@ -4,7 +4,12 @@ Bundler.require
 #require 'require-all'
 require 'open-uri'
 #require 'nokogiri'
+#require 'colorize'
 #require 'pry'
+#require 'rspec'
+
+module NationInfo
+end
 
 require_all './lib'
 

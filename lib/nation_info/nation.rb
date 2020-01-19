@@ -1,6 +1,6 @@
-class Nation
+class NationInfo::Nation
   
-  attr_accessor :name, :url, :location, :size, :climate, :population, :religions, :languages, :capital, :ppp_per_capita
+  attr_accessor :name, :url, :location, :size, :climate, :population, :capital
   
   @@all = []
   

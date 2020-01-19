@@ -1,4 +1,4 @@
-class CLI
+class NationInfo::CLI
   
   def run
     welcome
@@ -36,13 +36,17 @@ class CLI
   end
       
   def level_two
-    nation_list
+    get_list
+    print_list
     choose_nation
   end
   
-  def nation_list
-    Nation.create_from_array(Scraper.get_nations)
-    Nation.all.each_with_index{|n, i| puts "#{i + 1}.".colorize(:light_blue)+" #{n.name}"}
+  def get_list
+    NationInfo::Nation.create_from_array(NationInfo::Scraper.get_nations)
+  end
+ 
+ def print_list 
+    NationInfo::Nation.all.each_with_index{|n, i| puts "#{i + 1}.".colorize(:light_blue)+" #{n.name}"}
     puts " "
   end
   
@@ -52,12 +56,12 @@ class CLI
     until input == "E"
       input = gets.strip.upcase
       if input == "P"
-        nation_list
+        print_list
         choices_one
       elsif input != "E"
         input = input.to_i
-        if (1..(Nation.all.count)).include?(input)
-          nation = Nation.all[input - 1]
+        if (1..(NationInfo::Nation.all.count)).include?(input)
+          nation = NationInfo::Nation.all[input - 1]
           nation_info(nation)
           choices_two
         else
@@ -88,26 +92,40 @@ class CLI
   end
   
   def nation_info(nation)
-    nation.add_info(Scraper.get_info(nation.url))
+    nation.add_info(NationInfo::Scraper.get_info(nation.url))
     puts " "
     puts nation.name.upcase.colorize(:light_green)
     puts " "
-    puts "Capital:".colorize(:light_blue)+" #{nation.capital}"
+    if nation.capital == nil
+      puts "Capital:".colorize(:light_blue) + " N/A"
+    else
+      puts "Capital:".colorize(:light_blue) + " #{nation.capital.text}"
+    end
     puts " "
-    puts "Location:".colorize(:light_blue)+" #{nation.location}"
+    if nation.location == nil
+      puts "Location:".colorize(:light_blue) + " N/A"
+    else
+      puts "Location:".colorize(:light_blue) + " #{nation.location.text.capitalize}"
+    end
     puts " "
-    puts "Size:".colorize(:light_blue)+" #{nation.size}"
+    if nation.size == nil
+      puts "Size:".colorize(:light_blue) + " N/A"
+    else
+      puts "Size:".colorize(:light_blue) + " #{nation.size.text} sq km"
+    end
     puts " "
-    puts "Population:".colorize(:light_blue)+" #{nation.population}"
+    if nation.population == nil
+      puts "Population:".colorize(:light_blue) + " N/A"
+    else
+      puts "Population:".colorize(:light_blue) + " #{nation.population.text}"
+    end
     puts " "
-    puts "Climate:".colorize(:light_blue)+" #{nation.climate}"
+    if nation.climate == nil
+      puts "Climate:".colorize(:light_blue) + " N/A"
+    else
+      puts "Climate:".colorize(:light_blue) + " #{nation.climate.text.capitalize}"
+    end
     puts " "
-#    puts "Religions:        #{nation.religions}"
-#    puts "Languages:        #{nation.languages}"
-#    puts "GDP* per capita:".colorize(:light_blue)+" #{nation.ppp_per_capita}"
-#    puts " "
-#    puts "*Gross Domestic Product (Purchasing Power Parity) in U.S. $".colorize(:light_blue)
-#    puts " "
   end
   
   def invalid
