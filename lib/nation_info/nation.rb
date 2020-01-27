@@ -22,5 +22,9 @@ class NationInfo::Nation
   def self.all
     @@all
   end
-    
+  
+  def self.find_by_name(name_of_nation)
+    self.all.detect {|n| n.name == name_of_nation}
+  end
+  
 end

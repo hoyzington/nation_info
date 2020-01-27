@@ -3,13 +3,11 @@ class NationInfo::Scraper
   @@base_path = "http://www.geognos.com"
 
   def self.get_nations
-    result = []
     nations = Nokogiri::HTML(open(@@base_path + "/geo/en/countries-list/Country-Codes-ISO-3166-ISO-Numeric-ISO3-FIPS-ccTLD.html")).css("tbody tr")
-    nations.each_with_index do |n, i|
+    nations.map do |n|
       data = n.css("a")[1]
-      result[i] = {name: data.text, url: data.attribute("href").value}
+      {name: data.text, url: data.attribute("href").value}
     end
-    result
   end
   
   def self.get_info(nation_url)

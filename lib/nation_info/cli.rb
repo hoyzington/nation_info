@@ -37,6 +37,7 @@ class NationInfo::CLI
       
   def level_two
     get_list
+#    binding.pry
     print_list
     choose_nation
   end
@@ -54,20 +55,24 @@ class NationInfo::CLI
     choices_one
     input = nil
     until input == "E"
-      input = gets.strip.upcase
+      input = gets.strip.capitalize
       if input == "P"
         print_list
         choices_one
       elsif input != "E"
-        input = input.to_i
-        if (1..(NationInfo::Nation.all.count)).include?(input)
-          nation = NationInfo::Nation.all[input - 1]
-          nation_info(nation)
-          choices_two
-        else
-          invalid
-          choices_two
+#      binding.pry
+        nation = NationInfo::Nation.find_by_name(input)
+        if nation == nil
+          input = input.to_i
+          if (1..(NationInfo::Nation.all.count)).include?(input)
+            nation = NationInfo::Nation.all[input - 1]
+          else
+            invalid
+            choices_two
+          end
         end
+        nation_info(nation)
+        choices_two
       else
         result = ending
       end
