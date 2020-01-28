@@ -10,7 +10,7 @@ Clone this app and then execute:
 
 ## Usage
 
-From the `nation_info` directory, run `bin/nationinfo`.
+From the `nation_info` directory, run `./bin/nationinfo`.
 
 ## Contributing
 
